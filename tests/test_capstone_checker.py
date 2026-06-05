@@ -46,6 +46,10 @@ class TestCapstoneChecker(unittest.TestCase):
         self.assertFalse(result["references"]["passed"])
         self.assertFalse(result["ai_contents"]["passed"])
 
+    def test_figure_reference_requires_numeric_label(self):
+        result = check_document("Figure one shows interface behavior.")
+        self.assertFalse(result["figures"]["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()

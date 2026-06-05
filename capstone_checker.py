@@ -3,6 +3,8 @@ import re
 import sys
 from collections import Counter
 
+MAX_REPEATED_LINE_RATIO = 0.2
+
 
 def _result(passed, issues=None):
     return {"passed": passed, "issues": issues or []}
@@ -96,10 +98,13 @@ def check_similarity(lines):
 
     counts = Counter(normalized)
     repeated_lines = sum(count for count in counts.values() if count > 1)
-    ratio = repeated_lines / len(normalized)
+    repeated_line_ratio = repeated_lines / len(normalized)
 
-    if ratio > 0.2:
-        return _result(False, [f"High repeated-line similarity detected ({ratio:.0%})."])
+    if repeated_line_ratio > MAX_REPEATED_LINE_RATIO:
+        return _result(
+            False,
+            [f"High repeated-line similarity detected ({repeated_line_ratio:.0%})."],
+        )
     return _result(True)
 
 
