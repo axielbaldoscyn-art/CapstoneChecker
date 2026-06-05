@@ -50,6 +50,10 @@ class TestCapstoneChecker(unittest.TestCase):
         result = check_document("Figure one shows interface behavior.")
         self.assertFalse(result["figures"]["passed"])
 
+    def test_grammar_requires_uppercase_sentence_start(self):
+        result = check_document("introduction starts lowercase.")
+        self.assertFalse(result["grammar"]["passed"])
+
     def test_similarity_fails_for_heavy_duplicate_lines(self):
         duplicated = "\n".join(["Repeated line."] * 3 + ["Unique one.", "Unique two."])
         result = check_document(duplicated)
