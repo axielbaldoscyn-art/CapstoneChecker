@@ -3,7 +3,7 @@ import re
 import sys
 from collections import Counter
 
-MAX_ALLOWED_REPEATED_LINE_RATIO = 0.2
+MAX_ALLOWED_DUPLICATE_RATIO = 0.2
 
 
 def _result(passed, issues=None):
@@ -100,7 +100,7 @@ def check_similarity(lines):
     total_duplicate_occurrences = sum(count - 1 for count in counts.values() if count > 1)
     repeated_line_ratio = total_duplicate_occurrences / len(normalized)
 
-    if repeated_line_ratio > MAX_ALLOWED_REPEATED_LINE_RATIO:
+    if repeated_line_ratio > MAX_ALLOWED_DUPLICATE_RATIO:
         return _result(
             False,
             [f"High repeated-line similarity detected ({repeated_line_ratio:.0%})."],
@@ -147,7 +147,7 @@ def check_document(text):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python capstone_checker.py <document.txt>")
+        print("Usage: python capstone_checker.py <document.txt>", file=sys.stderr)
         return 1
     path = sys.argv[1]
     with open(path, "r", encoding="utf-8") as file:

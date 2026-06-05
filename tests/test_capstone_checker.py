@@ -55,8 +55,8 @@ class TestCapstoneChecker(unittest.TestCase):
         self.assertFalse(result["grammar"]["passed"])
 
     def test_similarity_fails_for_heavy_duplicate_lines(self):
-        document_with_duplicates = "\n".join(["Repeated line."] * 3 + ["Unique one.", "Unique two."])
-        result = check_document(document_with_duplicates)
+        duplicate_heavy_doc = "\n".join(["Repeated line."] * 3 + ["Unique one.", "Unique two."])
+        result = check_document(duplicate_heavy_doc)
         self.assertFalse(result["similarity"]["passed"])
 
 
