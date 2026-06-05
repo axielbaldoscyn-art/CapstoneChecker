@@ -6,7 +6,7 @@ Capstone Document Checker for ISU Cauayan Campus
 Run the checker against a `.txt` document:
 
 ```bash
-python /tmp/workspace/axielbaldoscyn-art/CapstoneChecker/capstone_checker.py /path/to/document.txt
+python capstone_checker.py /path/to/document.txt
 ```
 
 The checker validates:
