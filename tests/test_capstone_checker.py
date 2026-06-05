@@ -50,6 +50,11 @@ class TestCapstoneChecker(unittest.TestCase):
         result = check_document("Figure one shows interface behavior.")
         self.assertFalse(result["figures"]["passed"])
 
+    def test_similarity_fails_for_heavy_duplicate_lines(self):
+        duplicated = "\n".join(["Repeated line."] * 3 + ["Unique one.", "Unique two."])
+        result = check_document(duplicated)
+        self.assertFalse(result["similarity"]["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()

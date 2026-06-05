@@ -97,7 +97,7 @@ def check_similarity(lines):
         return _result(False, ["Document is empty."])
 
     counts = Counter(normalized)
-    repeated_line_occurrences = sum(count for count in counts.values() if count > 1)
+    repeated_line_occurrences = sum(count - 1 for count in counts.values() if count > 1)
     repeated_line_ratio = repeated_line_occurrences / len(normalized)
 
     if repeated_line_ratio > MAX_ALLOWED_REPEATED_LINE_RATIO:
